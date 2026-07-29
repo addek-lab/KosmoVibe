@@ -31,9 +31,8 @@ Whether you want to add a subtle retro flavor to a vocal track, or push the feed
 
 You don't need to compile anything yourself! We provide ready-to-use binaries directly from our automated cloud build system.
 
-1. Go to the [**Actions Tab**](https://github.com/addek-lab/KosmoVibe/actions) on this repository.
-2. Click on the latest successful build.
-3. Scroll down to the **Artifacts** section and download the ZIP file for your operating system:
+1. Go to the [**Releases Page**](https://github.com/addek-lab/KosmoVibe/releases) on this repository.
+2. Download the ZIP file for your operating system from the latest release:
    - **`KosmoVibe-Windows`** (Contains the `.vst3` and `.exe` Standalone app).
    - **`KosmoVibe-macOS`** (Contains the `.vst3`, `.component` for AU, and `.app` Standalone app).
 
