@@ -9,6 +9,9 @@ on:
     branches: [ main, master ]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build:
     name: Build on ${{ matrix.os }}
@@ -32,8 +35,9 @@ jobs:
       with:
         name: KosmoVibe-Windows
         path: |
-          build/KosmoVibe_artefacts/VST3/KosmoVibe.vst3/
-          build/KosmoVibe_artefacts/Standalone/KosmoVibe.exe
+          build/**/KosmoVibe.vst3
+          build/**/KosmoVibe.exe
+          build/**/KosmoVibe.vst3/
 
     - name: Upload Artifacts (macOS)
       if: matrix.os == 'macos-latest'
@@ -41,9 +45,12 @@ jobs:
       with:
         name: KosmoVibe-macOS
         path: |
-          build/KosmoVibe_artefacts/VST3/KosmoVibe.vst3/
-          build/KosmoVibe_artefacts/AU/KosmoVibe.component/
-          build/KosmoVibe_artefacts/Standalone/KosmoVibe.app/
+          build/**/KosmoVibe.vst3
+          build/**/KosmoVibe.component
+          build/**/KosmoVibe.app
+          build/**/KosmoVibe.vst3/
+          build/**/KosmoVibe.component/
+          build/**/KosmoVibe.app/
 
   release:
     needs: build
