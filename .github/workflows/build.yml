@@ -1,0 +1,44 @@
+name: Build Plugins
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest, macos-latest]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Configure CMake
+      run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+
+    - name: Build
+      run: cmake --build build --config Release
+
+    - name: Upload Artifacts (Windows)
+      if: matrix.os == 'windows-latest'
+      uses: actions/upload-artifact@v4
+      with:
+        name: KosmoVibe-Windows
+        path: |
+          build/KosmoVibe_artefacts/VST3/KosmoVibe.vst3/
+          build/KosmoVibe_artefacts/Standalone/KosmoVibe.exe
+
+    - name: Upload Artifacts (macOS)
+      if: matrix.os == 'macos-latest'
+      uses: actions/upload-artifact@v4
+      with:
+        name: KosmoVibe-macOS
+        path: |
+          build/KosmoVibe_artefacts/VST3/KosmoVibe.vst3/
+          build/KosmoVibe_artefacts/AU/KosmoVibe.component/
+          build/KosmoVibe_artefacts/Standalone/KosmoVibe.app/
